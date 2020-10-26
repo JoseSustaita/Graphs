@@ -27,7 +27,7 @@ player = Player(world.starting_room)
 
 # Fill this out with directions to walk
 
-Dictionary for retracing steps
+#Dictionary for retracing steps
 
 retraceSteps = {'n': 's','s': 'n','w': 'e','e': 'w'}
 
