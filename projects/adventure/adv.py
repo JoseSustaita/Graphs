@@ -27,19 +27,14 @@ player = Player(world.starting_room)
 
 # Fill this out with directions to walk
 
-retraceSteps = {
-    'n': 's',
-    's': 'n',
-    'w': 'e',
-    'e': 'w'
-}
+retraceSteps = {'n': 's','s': 'n','w': 'e','e': 'w'}
 
 
 def mapTransversal(current_room, visited=None):
-    # list for directions while moving rooms
+    # list for directions
     directions = []
     # If visited is none create a visited set(empty for now)
-    if visited == None:
+    if visited is None:
         visited = set()
 
     # Find all exits of current room
@@ -47,20 +42,20 @@ def mapTransversal(current_room, visited=None):
         # Move in the selected direction
         player.travel(move)
 
-        # If room was visited, the player retraces steps to find unvisted path
+        # If room was visited, the player retraces steps to find an unvisted path
         if player.current_room in visited:
             player.travel(retraceSteps[move])
         # If the player has not visited this room:
         else:
             # Add room to visited
             visited.add(player.current_room)
-            # Append the move to the directions list
+            # Append the move to the direction's list
             directions.append(move)
-            # recursively call and repeat the above loop and add directions to path
+            # recursively call the above loop
             directions += mapTransversal(player.current_room, visited)
             # Move to the previous room
             player.travel(retraceSteps[move])
-            # add retraceSteps to the directions list
+            # Add retraceSteps to the directions list
             directions.append(retraceSteps[move])
 
     return directions
